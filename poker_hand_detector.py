@@ -2,12 +2,13 @@ from ultralytics import YOLO
 import cv2 as cv
 import math
 import poker_hand_func
+import label_func
 
 cap = cv.VideoCapture(0)  # For Webcam
 cap.set(3, 1280)
 cap.set(4, 720)
 
-model = YOLO('YOLO\Poker_hand\playingCards.pt')
+model = YOLO('Poker_hand_detection_using_yolo\playingCards.pt')
 classNames = ['10C', '10D', '10H', '10S',
               '2C', '2D', '2H', '2S',
               '3C', '3D', '3H', '3S',
@@ -40,17 +41,21 @@ while True:
 
             #Display the card
             cv.rectangle(frame, (x1, y1), (x2,y2), (0, 255, 0), 2)
-            cv.putText(frame, f'{classNames[cls]}: {conf}', (max(0, x1), max(40, y1)), cv.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2, cv.LINE_4)
-
+            #cv.putText(frame, f'{classNames[cls]}: {conf}', (max(0, x1), max(40, y1)), cv.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2, cv.LINE_4)
+            label_func.draw_label(frame, f'{classNames[cls]}: {conf}', x1, y1)
             if conf > 0.3:
                 hand.append(classNames[cls])
     
     hand = list(set(hand))
-    print(hand)
-    if len(hand) == 5:
-        results = poker_hand_func.findPokerHand(hand)
-        print(results)
-        cv.putText(frame, f'Your hand: {results}', (400, 75), cv.FONT_HERSHEY_PLAIN, 3, (246, 70, 190), 3, cv.LINE_4)
+
+    if len(hand) == 5 or len(hand) == 6 or len(hand) == 7:
+        rank, best_hand = poker_hand_func.findPokerHand(hand)
+        print(rank)
+        print(best_hand)
+
+        #display hand
+        label_func.show_hand(frame, f'Your hand: {rank}, Your hand: {best_hand}')
+        #cv.putText(frame, f'Your hand: {results}', (400, 75), cv.FONT_HERSHEY_PLAIN, 3, (246, 70, 190), 3, cv.LINE_4)
 
     cv.imshow("webcam", frame)
     if cv.waitKey(1) & 0xFF == ord('q'):
