@@ -31,4 +31,14 @@ A real-time poker card recognition system using YOLO and OpenCV to detect cards 
 git clone https://github.com/yourusername/poker-hand-detection.git
 cd poker-hand-detection
 ```
+### 2. Install Dependencies
 
+```bash
+pip install -r requirements.txt
+```
+### 3. Run the Project
+
+```bash
+python detect.py
+```
+### Make sure your webcam is connected.
