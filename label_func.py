@@ -1,26 +1,26 @@
 import cv2 as cv
 
-def show_hand(frame, text, font=cv.FONT_HERSHEY_SIMPLEX, font_scale=0.8, font_thickness=2, padding=10):
+def show_hand(frame, text, start_pos=(10, 30), font=cv.FONT_HERSHEY_SIMPLEX,
+              font_scale=0.8, font_thickness=2, padding=10):
     # Text size
     text_size, _ = cv.getTextSize(text, font, font_scale, font_thickness)
     text_width, text_height = text_size
 
-    # Coordinates
-    x = padding
-    y = text_height + padding
+    # Coordinates from parameter
+    x, y = start_pos
 
     # Background box coordinates
     box_coords = ((x - 5, y - text_height - 5), (x + text_width + 5, y + 5))
-    
-    # Draw background rectangle (black with transparency)
+
+    # Draw background rectangle with transparency
     overlay = frame.copy()
     cv.rectangle(overlay, box_coords[0], box_coords[1], (0, 0, 0), -1)
-    alpha = 0.6  # Transparency
+    alpha = 0.6
     cv.addWeighted(overlay, alpha, frame, 1 - alpha, 0, frame)
 
-    # Draw the text (white)
+    # Draw text
     cv.putText(frame, text, (x, y), font, font_scale, (255, 255, 255), font_thickness, cv.LINE_AA)
-    
+
     return frame
 
 def draw_label(frame, text, x, y, color=(0, 255, 0)):
