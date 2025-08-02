@@ -26,7 +26,11 @@ classNames = ['10C', '10D', '10H', '10S',
 while True:
     ret, frame = cap.read()
     result = model(frame, stream=True)
+    frame_height = frame.shape[0]
+    line_y = int(frame_height * 0.6)
     hand = []
+    player_cards = []
+    community_cards = []
     for r in result:
         boxes = r.boxes
         for box in boxes:
@@ -38,7 +42,14 @@ while True:
             conf = math.ceil((box.conf[0] * 100)) / 100
 
             cls = int(box.cls[0])
+
             card_label = classNames[cls]
+
+            #seprate player and community card based on physical position
+            if y1 > line_y:
+                player_cards.append(card_label)
+            else:
+                community_cards.append(card_label)
 
             # Choose color based on whether the card is in best_hand
             if 'best_hand' in locals() and card_label in best_hand:
@@ -46,27 +57,27 @@ while True:
             else:
                 box_color = (0, 0, 255)  # Red for others
 
+            #Display the card
             cv.rectangle(frame, (x1, y1), (x2, y2), box_color, 2)
             label_func.draw_label(frame, f'{card_label}: {conf}', x1, y1, box_color)
 
-            #Display the card
-            #cv.rectangle(frame, (x1, y1), (x2,y2), (0, 255, 0), 2)
-            #cv.putText(frame, f'{classNames[cls]}: {conf}', (max(0, x1), max(40, y1)), cv.FONT_HERSHEY_PLAIN, 2, (0, 255, 0), 2, cv.LINE_4)
-            #label_func.draw_label(frame, f'{classNames[cls]}: {conf}', x1, y1)
             if conf > 0.3:
                 hand.append(card_label)
     
     hand = list(set(hand))
 
-    if len(hand) == 5 or len(hand) == 6 or len(hand) == 7:
-        rank, best_hand = poker_hand_func.findPokerHand(hand)
-        print(rank)
-        print(best_hand)
+    if len(player_cards) == 2 and len(community_cards) >= 3:
+        full_hand = player_cards + community_cards
+        if len(full_hand) >= 5:
+            rank, best_hand = poker_hand_func.findPokerHand(full_hand[:7])
+            print(rank)
+            print(best_hand)
 
         #display hand
         label_func.show_hand(frame, f'Your hand: {rank}, Your card: {best_hand}')
-        #cv.putText(frame, f'Your hand: {results}', (400, 75), cv.FONT_HERSHEY_PLAIN, 3, (246, 70, 190), 3, cv.LINE_4)
 
+    #display line that seprates player and community card
+    cv.line(frame, (0, line_y), (frame.shape[1], line_y), (0, 0, 255), 2)
     cv.imshow("webcam", frame)
     if cv.waitKey(1) & 0xFF == ord('q'):
         break
