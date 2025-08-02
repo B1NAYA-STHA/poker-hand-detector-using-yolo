@@ -79,7 +79,7 @@ def findPokerHand(cards):
             best_hand = hand
 
     output = pokerHandRanks[best_hand_score[0]]  # Get hand name
-    return output, best_hand
+    return output, best_hand, best_hand_score[0]
 
 
 if __name__ == "__main__":
