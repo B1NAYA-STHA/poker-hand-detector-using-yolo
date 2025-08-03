@@ -46,4 +46,4 @@ def simulate(player_card, comm_card, opponents=3, iterations=1000):
 
 # Example usage
 if __name__ == "__main__":
-    simulate(['10C', '5S'], ['10S', '9C', 'AS', '2S', '3S'])
+    simulate(["5C", "7S"], ["8D", "AD", "5H", "KS", "QS"])

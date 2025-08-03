@@ -78,7 +78,8 @@ def findPokerHand(cards):
             best_hand_score = current_score
             best_hand = hand
 
-    output = pokerHandRanks[best_hand_score[0]]  # Get hand name
+    output = pokerHandRanks[best_hand_score[0]]  # Get hand name\
+    #print(output, best_hand)
     return output, best_hand, best_hand_score[0]
 
 
@@ -88,8 +89,8 @@ if __name__ == "__main__":
     #findPokerHand(["5C", "5S", "5H", "5D", "QH"])  # Four of a Kind
     #findPokerHand(["2H", "2D", "2S", "10H", "10C"])  # Full House
     #findPokerHand(["2D", "KD", "7D", "6D", "5D"])  # Flush
-    #findPokerHand(["JC", "10H", "9C", "8C", "7D", "AC", "2C"])  # Straight
+    findPokerHand(["5C", "7H", "8D", "AD", "5H", "KS", "QS"])  # Straight
     #findPokerHand(["10H", "10C", "10D", "2D", "5S"])  # Three of a Kind
     #findPokerHand(["7D", "7H", "KC", "7S", "AD", "5D", "10H"])  # Two Pair
     #findPokerHand(["2D", "2S", "9C", "KD", "10C"])  # Pair
-    findPokerHand(["KD", "5H", "2D", "10C", "JH"])  # High Card
+    #findPokerHand(["KD", "5H", "2D", "10C", "JH"])  # High Card
