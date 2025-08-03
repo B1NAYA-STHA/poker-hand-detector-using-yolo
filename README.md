@@ -1,15 +1,17 @@
 # 🃏 Poker Hand Detection using YOLO
 
-A real-time poker card recognition system using YOLO and OpenCV to detect cards from a webcam feed and identify the best 5-card poker hand.
+A real-time poker card recognition system using YOLO and OpenCV to detect cards from a webcam feed or a video and identify the best 5-card poker hand.
 
 ---
 
 ## 🧠 Features
 
-- 🔍 Detects 52 standard playing cards using a trained YOLO model.
+- 🔍 Detects 52 standard playing cards using a custom trained YOLO model.
 - 🧮 Identifies best 5-card poker hand from 7 cards.
-- 🎨 Highlights best-hand cards in a different color.
-- 🖼 Displays labeled bounding boxes with confidence scores.
+- 🎯 Monte Carlo Simulation: Estimates your win probability against multiple opponents.
+- 🎨 Color-Coded Display: Highlights the cards contributing to your best hand in green.
+- 💬 Custom Label Renderer: Stylish label display for card name and confidence.
+- 🔀 Separation Logic: Separates community and player cards based on position.
 - 🧠 Modular code with customizable logic.
 
 ---
@@ -42,3 +44,7 @@ pip install -r requirements.txt
 python detect.py
 ```
 ### Make sure your webcam is connected.
+
+### 4. Optional: Run on a Video File
+
+#### Uncomment and modify cap = cv.VideoCapture("path_to_video.mp4") in detect.py.
