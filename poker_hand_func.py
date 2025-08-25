@@ -88,9 +88,9 @@ if __name__ == "__main__":
     #findPokerHand(["QC", "JC", "10C", "9C", "8C"])  # Straight Flush
     #findPokerHand(["5C", "5S", "5H", "5D", "QH"])  # Four of a Kind
     #findPokerHand(["2H", "2D", "2S", "10H", "10C"])  # Full House
-    #findPokerHand(["2D", "KD", "7D", "6D", "5D"])  # Flush
+    findPokerHand(["2D", "KD", "7D", "6D", "5D"])  # Flush
     findPokerHand(["5C", "7H", "8D", "AD", "5H", "KS", "QS"])  # Straight
-    #findPokerHand(["10H", "10C", "10D", "2D", "5S"])  # Three of a Kind
-    #findPokerHand(["7D", "7H", "KC", "7S", "AD", "5D", "10H"])  # Two Pair
-    #findPokerHand(["2D", "2S", "9C", "KD", "10C"])  # Pair
-    #findPokerHand(["KD", "5H", "2D", "10C", "JH"])  # High Card
+    findPokerHand(["10H", "10C", "10D", "2D", "5S"])  # Three of a Kind
+    findPokerHand(["7D", "7H", "KC", "7S", "AD", "5D", "10H"])  # Two Pair
+    findPokerHand(["2D", "2S", "9C", "KD", "10C"])  # Pair
+    findPokerHand(["KD", "5H", "2D", "10C", "JH"])  # High Card

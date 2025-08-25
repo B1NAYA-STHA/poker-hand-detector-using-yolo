@@ -7,5 +7,5 @@ def all_hands(cards):
 
 if __name__ == "__main__":
     all_hands(["AH", "KH", "QH", "JH", "10H", "7H"])
-
+    all_hands(["1H", "2D", "3H", "3D", "3C"])
     

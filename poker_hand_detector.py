@@ -7,15 +7,15 @@ from cards_names import classNames
 import simulation
 import save_video_func
 
-cap = cv.VideoCapture(0)  # For Webcam
-#cap = cv.VideoCapture("Poker_hand_detection_using_yolo\\resources\\video2.mp4")  # Video file
-#output_video_url = "Poker_hand_detection_using_yolo\output_video\\1.mp4"
+#cap = cv.VideoCapture(0)  # For Webcam
+cap = cv.VideoCapture("Poker_hand_detection_using_yolo\\resources\\video2.mp4")  # Video file
+output_video_url = "Poker_hand_detection_using_yolo\output_video\\1.mp4"
 cap.set(3, 1280)
 cap.set(4, 720)
 
 model = YOLO('Poker_hand_detection_using_yolo\playingCards.pt')
 
-#video_write = save_video_func.video_writer(output_video_url, fps=30, frame_size=(1280, 720))
+video_write = save_video_func.video_writer(output_video_url, fps=30, frame_size=(1280, 720))
 
 last_player_cards = []
 last_community_cards = []
